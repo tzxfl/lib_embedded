@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="lib-embedded" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/lib-embedded" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/lib-embedded" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+		</Compiler>
+		<Unit filename="../../include/common/lpi_types.h" />
+		<Unit filename="../../include/gpio/lpi_gpio.h" />
+		<Unit filename="../../include/i2c/lpi_i2c.h" />
+		<Unit filename="../../include/list/lpi_list.h" />
+		<Unit filename="../../include/lock/lpi_lock.h" />
+		<Unit filename="../../include/network/lpi_network.h" />
+		<Unit filename="../../include/pthread/lpi_thread.h" />
+		<Unit filename="../../include/rtc/lpi_rtc.h" />
+		<Unit filename="../../include/serial/lpi_serial.h" />
+		<Unit filename="../../include/spi/lpi_spi.h" />
+		<Unit filename="../../include/time/lpi_time.h" />
+		<Unit filename="../../include/timer/lpi_timer.h" />
+		<Unit filename="../../include/watchdog/lpi_watchdog.h" />
+		<Unit filename="../../source/gpio/lpi_gpio.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../../source/i2c/lpi_i2c.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../../source/lock/lpi_lock.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../../source/network/lpi_network.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../../source/pthread/lpi_thread.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../../source/rtc/lpi_rtc.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../../source/serial/lpi_serial.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../../source/spi/lpi_spi.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../../source/time/lpi_time.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../../source/timer/lpi_timer.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../../source/watchdog/lpi_watchdog.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
