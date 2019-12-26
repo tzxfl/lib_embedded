@@ -19,4 +19,6 @@ int i2c_read_data(HI2C h, char *data,int pos, int *len);
 
 int i2c_write_data(HI2C h, char *data, int pos, int *len);
 
+int i2c_config(HI2C h,int timeout,int retries);
+
 #endif // LPI_I2C_H

@@ -67,18 +67,75 @@ int i2c_read_byte(HI2C h,char *data,int pos)
 	return i2c_read_data(h,data,pos,&size);
 }
 
-int i2c_write_byte(HI2C h, char *data,int pos)
+int i2c_write_byte(HI2C h, unsigned char addr,char *data,int pos)
 {
 	int size = 1;
-	return i2c_write_data(h,data,pos,&size);
+	return i2c_write_data(h,addr,data,pos,&size);
 }
 
-int i2c_read_data(HI2C h, char *data,int pos, int *len)
+int i2c_read_data(HI2C h,unsigned char addr,char *data,int pos, int *len)
 {
 	i2c_t *i2c = (i2c_t *)h;
 	if (i2c==NULL || data == NULL || len == NULL || pos < 0){
 			return -1;
 	}
 
+    struct i2c_rdwr_ioctl_data i2c_data;
+    struct i2c_msg i2c_msg[2];
 
+    i2c_data.nmsgs = 2;
+    i2c_data.msgs = &i2c_msg[0];
+
+    i2c_config(h,1,2);
+
+    // write reg
+    i2c_msg[0].len = 1;
+    i2c_msg[0].addr = addr;
+    i2c_msg[0].flags = 0;
+    i2c_msg[0].buf = data;
+
+    //read data
+    i2c_msg[1].len = *len;
+    i2c_msg[1].addr = addr;
+    i2c_msg[1].flags = 1;
+    i2c_msg[1].buf = data;
+
+    int ret = ioctl(i2c->fd,I2C_RDWR,&i2c_data);
+
+    return ret;
+}
+
+int i2c_write_data(HI2C h,unsigned char addr,char *data, int pos,int *len)
+{
+    i2c_t *i2c = (i2c_t *)h;
+
+    struct i2c_rdwr_ioctl_data i2c_data;
+    struct i2c_msg i2c_msg;
+
+    i2c_data.nmsgs = 1;
+    i2c_data.msgs = &i2c_msg;
+
+    i2c_config(h,1,2);
+
+    i2c_msg.len = *len;
+    i2c_msg.addr = addr;
+    i2c_msg.flags = 0; // 0 write 1 read
+    i2c_msg.buf = data;
+
+    int ret = ioctl(i2c->fd,I2C_RDWR,&i2c_data);
+
+    return ret;
+}
+
+int i2c_config(HI2C h,int timeout,int retries)
+{
+    i2c_t *i2c = (i2c_t *)h;
+    if(NULL == i2c)
+        return -1;
+    //超时时间
+    ioctl(i2c->fd,I2C_TIMEOUT,timeout > 0 ? timeout : 0);
+    //重试次数
+    ioctl(i2c->fd,I2C_RETRIES,retries > 0 ? retries : 0);
+
+    return 0;
 }
